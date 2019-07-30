@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    
+    <link rel="stylesheet"  href="\Users\erbbshn\Desktop\multiselect-master\css\style.css">
+    <script type="text/javascript" src="\Users\erbbshn\Desktop\multiselect-master\dist\js\multiselect.js"></script>
+    <script type="text/javascript" src="\Users\erbbshn\Desktop\multiselect-master\dist\js\multiselect.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#multiselect').multiselect();
+        });
+    <title>Document</title>
+</head>
+<body>
+    <form method="GET">
+            {% csrf_token %}
+                <select name="selectfrom" id="select-from" multiple size="5">
+                  <option value="1">Item 1</option>
+                  <option value="2">Item 2</option>
+                  <option value="3">Item 3</option>
+                  <option value="4">Item 4</option>
+                </select>
+             
+                <a href="JavaScript:void(0);" id="btn-add">Add &raquo;</a>
+                <a href="JavaScript:void(0);" id="btn-remove">&laquo; Remove</a>
+             
+                <select name="selectto" id="select-to" multiple size="5">
+                  <option value="5">Item 5</option>
+                  <option value="6">Item 6</option>
+                  <option value="7">Item 7</option>
+                </select>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <select name="from[]" id="multiselect" class="form-control" size="8" multiple="multiple">
+                            <option value="1">Item 1</option>
+                            <option value="1">Item 2</option>
+                            <option value="1">Item 3</option>
+                            
+                        </select>
+                    </div>
+                    
+                    <div class="col-xs-2">
+                        <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+                        <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                        <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                    </div>
+                    
+                    <div class="col-xs-5">
+                        <select name="to[]" id="multiselect_to" class="form-control" size="8" multiple="multiple">
+                                <option value="3">Item 4</option>
+                                <option value="2">Item 5</option>
+                        </select>
+                    </div>
+            </div>
+             
+              <button class="btn btn-outline-info" type="submit">Update</button>
+            </form>
+          
+          <script>
+          $(document).ready(function() {
+ 
+ $('#btn-add').click(function(){
+     $('#select-from option:selected').each( function() {
+             $('#select-to').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+         $(this).remove();
+     });
+ });
+ $('#btn-remove').click(function(){
+     $('#select-to option:selected').each( function() {
+         $('#select-from').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+         $(this).remove();
+     });
+ });
+
+});
+          </script>
+</body>
+</html>
